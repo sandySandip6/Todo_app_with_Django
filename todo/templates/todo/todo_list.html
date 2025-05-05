@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>To-Do List</title>
+    <style>
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background-color: #f0f2f5;
+            margin: 0;
+            padding: 40px;
+        }
+
+        h1 {
+            text-align: center;
+            color: #333;
+        }
+
+        a.button {
+            display: inline-block;
+            margin: 20px auto;
+            padding: 10px 20px;
+            background-color: #007bff;
+            color: #fff;
+            text-decoration: none;
+            border-radius: 6px;
+            transition: background-color 0.3s;
+        }
+
+        a.button:hover {
+            background-color: #0056b3;
+        }
+
+        ul {
+            list-style: none;
+            padding: 0;
+            max-width: 600px;
+            margin: 0 auto;
+        }
+
+        li {
+            background-color: #fff;
+            margin-bottom: 15px;
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+        }
+
+        li p {
+            margin: 10px 0;
+            color: #555;
+        }
+
+        li a {
+            margin-right: 10px;
+            color: #007bff;
+            text-decoration: none;
+            font-weight: bold;
+        }
+
+        li a:hover {
+            text-decoration: underline;
+        }
+
+        .status {
+            font-size: 1.2em;
+        }
+
+        .completed {
+            color: green;
+        }
+
+        .incomplete {
+            color: red;
+        }
+    </style>
+</head>
+<body>
+
+    <h1>📝 To-Do List</h1>
+    <div style="text-align: center;">
+        <a href="{% url 'todo_add' %}" class="button">➕ Add Task</a>
+    </div>
+
+    <ul>
+      {% for task in todos %}
+        <li>
+            <strong>{{ task.title }}</strong>
+            <div class="status">
+                {% if task.compeleted %}
+                    <span class="completed">✅ Completed</span>
+                {% else %}
+                    <span class="incomplete">❌ Not Completed</span>
+                {% endif %}
+            </div>
+            <p>{{ task.description }}</p>
+            <a href="{% url 'todo_edit' task.id %}">✏️ Edit</a>
+            <a href="{% url 'todo_delete' task.id %}">🗑️ Delete</a>
+        </li>
+      {% empty %}
+        <li>No tasks found. Add your first task above!</li>
+      {% endfor %}
+    </ul>
+
+</body>
+</html>

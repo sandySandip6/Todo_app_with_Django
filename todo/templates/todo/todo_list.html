@@ -94,6 +94,7 @@
                 {% endif %}
             </div>
             <p>{{ task.description }}</p>
+            <p><em>Sentiment:</em> {{ task.sentiment }}</p>
             <a href="{% url 'todo_edit' task.id %}">✏️ Edit</a>
             <a href="{% url 'todo_delete' task.id %}">🗑️ Delete</a>
         </li>
